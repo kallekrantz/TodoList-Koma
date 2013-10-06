@@ -3,11 +3,11 @@ package com.example.mytodolist;
 public class Todo {
 	  private long id;
 	  private String todo;
-	  public Todo(){}
-	  public Todo(String todo){
-		  this.todo = todo;
-//		  this.id = id;
+	  
+	  public Todo(){
+		  
 	  }
+
 	  public long getId() {
 	    return id;
 	  }

@@ -40,7 +40,6 @@ public class MainActivity extends ListActivity {
 		    		EditText eText = (EditText)findViewById(R.id.editText1);
 		    		String text = eText.getText().toString();
 		    		if (text.length() > 0) {
-//		    			Todo t = new Todo(text);
 		    			Todo todo = datasource.createTodo(text);
 		    			adapter.add(todo);
 		    			eText.setText("");
@@ -51,18 +50,20 @@ public class MainActivity extends ListActivity {
     }
     public void onListItemClick(ListView listView, View view, final int position, final long id){
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Confirm " + position + " " + array.get((int)id))
-               .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setMessage("Confirm " + position + " " + array.get((int)id));
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int innerId) {
                    }
-               })
-               .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+               });
+        builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int innerId) {
                        // User cancelled the dialog
                 	   datasource.deleteTodo(array.get((int)id));
                 	   adapter.remove(array.get((int)id));
                    }
-               }).create().show();
+               });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
