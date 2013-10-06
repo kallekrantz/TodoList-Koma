@@ -29,3 +29,4 @@ proguard/
 *.aux
 *.log
 *.pdf
+*.out
