@@ -29,6 +29,7 @@
 \fancyhead{}
 \input{code/colorize}
 \usepackage[hidelinks]{hyperref}
+\usepackage{framed}
 
 \definecolor{dark-red}{rgb}{0.4,0.15,0.15}
 \definecolor{dark-blue}{rgb}{0.15,0.15,0.4}
@@ -37,6 +38,7 @@
     colorlinks, linkcolor={dark-red},
     citecolor={dark-blue}, urlcolor={medium-blue}
 }
+
 
 \begin{document}
 
@@ -98,19 +100,97 @@ Testa att det fungerar genom att logga i funktionen onCreate.
 \input{code/log}
 
 \section{Visa en lista}
-bla bla bla.. lista bla bla
+För att kunna skapa en lista med saker att göra är det lämpligt att först skapa den grafiska layouten för listan. Det grafiska gränssnittet ligger i filen “\textit{res -> layout -> activity\_main.xml}”.\\
+I Eclipse så kan du enkelt navigera till filen i “Package Explorer”. Dubbelklicka för att öppna den.\\
 
+Nu bör du få upp hur det grafiska gränssnittet ser ut i en mobiltelefon/surfplatta. Här kan du direkt redigera gränssnittet genom att dra in olika element ifrån “Palette” eller redigera XML-koden genom att byta ifrån “Graphical layout” till “activity\_main.xml” i nedre delen av fönstret. Du behöver inte välja antingen eller, men det är bra att ha koll på båda.\\
+
+Textfältet “Hello World!” kan du bara ta bort genom att antingen markera det direkt eller markera det i listan “Outline” till höger, och trycka på delete.\\ 
+
+Skapa en lista genom att dra in elementet “\textit{Composite -> ListView}”. För att våran aktivitet i appen ska kunna nå listan så måste den få ett lite annorlunda “id” än vad den har nu. I “\textit{Properties}” finns det ett fält som heter “Id”. Ändra innehållet i den till “\textit{@android:id/list}”. Detta är lite speciellt när det kommer till just en lista och vi kommer senare att behandla id på ett lite mer konventionellt sätt när det kommer till knappar och textfält.\\
+
+Nu kan du återgå till koden i filen MainActivity.java, som innehåller källkoden för huvudaktiviteten i din app.
+Då vi har valt att skapa en lista i vår Activity, så gör vi bäst i att ärva från ListActivity istället för Activity i vår klass.
+Ändra så att MainActivity ärver ifrån ListActivity istället för Activity. \\
+
+Eclipse vet inte automatiskt vad en ListActivity är och markerar detta som ett fel i koden. Importera klassen genom att klicka på det rödmarkerade ListActivity och välj “Import ‘ListActivity’ (android.app)”. Eclipse har även ett snabbkommando (ctrl+shift+o) för att hantera vad som behöver importeras.\\
+
+För att göra en enkel lista att testa ditt grafiska gränsnitt med, så behövs det lite data att visa.
+Ge din klass en privat datamedlem som är en String ArrayList och döp den till testData. ArrayList är i syntaxen ganska lik Vector, som du nog är bekant med sedan tidigare.
+Deklarera även en privat datamedlem av klassen ArrayAdapter som tar typen String och döp en till adapter.\\
+
+
+I metoden onCreate, som anropas direkt efter appen har startats, kan du instansiera din String ArrayList med lite testdata. Här gör du som du vill, ett sätt är bara loopa igenom arrayen och lägga in en siffra eller textsnutt för varje index.\\
+
+Nu måste vi koppla denna data till vårt grafiska gränssnitt. Detta är inte helt intuitivt till en början, så ni får lite hjälp med det:
+\input{code/arrayadapter}
+Det som sker här är att vi skapar en s.k ArrayAdapter som kopplar ihop datan som är lagrad i testData med det grafiska gränsnittet. Vi anger vilken datatyp det är (String) och var datan är lagrad (testData). Tillslut tilldelar vi adaptern till aktiviteten via setListAdapter.\\
+
+Om allt har gått rätt till så bör nu appen kunna startas genom att trycka på Run. Appen bör startas i Android emulatorn. En lista, som förvisso är rätt tråkig och statisk, bör nu visas!\\ \\
+
+
+\fbox{
+  \parbox{\textwidth}{
+	Uppgift: Gör en lista i det grafiska gränssnittet.
+	Skapa en ArrayList av typen String, initialisera den med lite data
+	och koppla ihop det med en ArrayAdapter, också av typen String.
+	}
+}
 \section{Interagera (click event) med en lista}
-bla bla bla.. lista klicka debugprint bla bla
+Nu är det dags att få igång interaktionen med listan. Eftersom vår \textit{MainActivity} ärver av \textit{ListActivity}, så är det ganska enkelt att komma igång med.\\
 
+För att skapa en event listener som lyssnar på interaktioner med listan ska vi överlagra metoden \textit{onListItemClick} från \textit{ListActivity}. Här kan vi använda Eclipse för att generera en metodsignatur. Ställ markören någonstans i klassen \textit{MainActivity} (men inte i någon metod), börja skriva \textit{“onListItemClick”} och tryck ctrl+space. Eclipse föreslår då att infoga en överlagrad variant av \textit{onListItemClick} från \textit{ListActivity} med alla funktionsparametrar som behövs.\\
+
+Inne i metoden kan vi nu bestämma vad som ska hända när en användare klickar på en rad i listan. Enklast just nu är förstås att bara logga till LogCat.\\
+
+När du nu kör din app igen, så bör LogCat visa din text när man trycker på en post i listan.\\ \\
+\fbox{
+  \parbox{\textwidth}{
+	Uppgift: Implentera onListItemClick och skriv ut någon text genom LogCat för att se att interaktionen med listan funkar korrekt. 
+	}
+}
 \section{Visa en popup}
+Nu när vi vet att det funkar att klicka på en post i listan, så kanske det kan vara roligare att få upp ett meddelande i appen istället för LogCat.
 
+Tidigare så såg vi att man enkelt kunde utforma sitt grafiska gränssnitt med den grafiska editorn. Det kan man använda för mer eller mindre allt grafiskt arbete, men när det kommer till enklare saker som tex dialogrutor kan det vara lämpligt att skriva de direkt i koden.
+
+För att göra detta använder vi oss av en \textit{Builder} till komponenten \textit{AlertDialog}. \textit{AlertDialog} visar en popup dialog anpassad för saker som att bekräfta en återgärd eller visa information om en post.
+
+\input{code/alertdialogbuilder}
+Vi kan nu lägga till saker i våran builder. Anropa metoden setMessage med en sträng som argument för att sätta ett textmeddelande som dyker upp när man trycket på en post.
+
+Vi har ännu inte skapat våran \textit{AlertDialog}, men det gör vi nu genom att anropa 
+\input{code/alertdialogcreate}
+Sedan kan vi visa dialog genom dialog.show();
+Kör appen och se hur du nu får en popup ruta med texten när du klickar på en post!\\ \\
+\fbox{
+  \parbox{\textwidth}{
+	Uppgift: Använd dig av \textit{AlertDialog} och dess tillhörande \textit{Builder} för att skapa en dialogruta som visas när man trycker på en post i listan.
+	}
+}
+
+\section{Ta bort poster}
+Låt oss nu försöka lägga till funktionalitet för att kunna ta bort en post ifrån listan. 
+Med metoderna setPositiveButton och setNegativeButton på builder-objektet kan man enkelt få upp två knappar som man kan styra hur man vill. Båda två metoderna tar två argument; en sträng för texten på knappen och en OnClickListener.
+Här kan du antingen anropa en lyssnare som du skapat någon annanstans, eller helt enkelt skapa den direkt i metodanropet genom 
+\input{code/newonclick}
+
+Inuti denna lyssnare så måste metoden \textit{onClick(DialogInterface, int)} finnas. Det är alltså här inne som funktionaliteten för att kunna ta bort en post ifrån listan skall implementeras.\\
+
+För att ta bort en post ifrån listan så behöver du anropa metoden \textit{remove} på medlemmen adapter. remove tar i det här fallet ett objekt av typen String som argument, då ArrayAdapter:n har blivit deklarerad för att hantera just String. Här vill du nu plocka bort den aktuella posten i listan genom att hitta den i testData.\\  
+Om du gjort rätt så kommer posten tas bort från både testData och adapter, vilket kommer resultera i att listan i det grafiska gränssnittet uppdateras korrekt.\\
+
+Knappen för “Ok” behöver inte göra någonting, så hela onClick-metoden kan bara vara tom.\\ \\
+
+\fbox{
+  \parbox{\textwidth}{
+	Uppgift: Skapa två knappar i dialogrutan, en som bara är “Ok” och inte gör något mer än att stänga rutan, och en “Delete” som tar bort den aktuella posten från listan.
+	}
+}
 \section{Databaskoppling}
 
 \section{Byt ut debugprinten mot databas hantering}
 
 \section{Extra saker}
-
-\input{code/onclick}
 
 \end{document}
