@@ -50,7 +50,7 @@ public class MainActivity extends ListActivity {
     }
     public void onListItemClick(ListView listView, View view, final int position, final long id){
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Confirm " + position + " " + array.get((int)id));
+        builder.setMessage("Selected: " + array.get((int)id));
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int innerId) {
                    }
