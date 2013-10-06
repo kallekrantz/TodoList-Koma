@@ -11,7 +11,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends ListActivity {
 	private ArrayList<Todo> array;
@@ -29,6 +32,22 @@ public class MainActivity extends ListActivity {
         		android.R.layout.simple_list_item_1 , array);
         setListAdapter(adapter);
         setContentView(R.layout.activity_main);
+        final Button button = (Button) findViewById(R.id.button1);
+        button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+		    	if(v.getId() == R.id.button1){
+		    		EditText eText = (EditText)findViewById(R.id.editText1);
+		    		String text = eText.getText().toString();
+		    		if (text.length() > 0) {
+//		    			Todo t = new Todo(text);
+		    			Todo todo = datasource.createTodo(text);
+		    			adapter.add(todo);
+		    			eText.setText("");
+		    		}
+		    	}
+			}
+		});
     }
     public void onListItemClick(ListView listView, View view, final int position, final long id){
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);

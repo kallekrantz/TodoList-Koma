@@ -4,9 +4,9 @@ public class Todo {
 	  private long id;
 	  private String todo;
 	  public Todo(){}
-	  public Todo(String todo, long id){
+	  public Todo(String todo){
 		  this.todo = todo;
-		  this.id = id;
+//		  this.id = id;
 	  }
 	  public long getId() {
 	    return id;
