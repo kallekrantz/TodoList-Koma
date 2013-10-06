@@ -16,8 +16,8 @@
 \usepackage{textcomp}
 \usepackage{tgpagella}
 \usepackage{lmodern}
-\usepackage[utf8]{inputenc}
-
+\usepackage{fancyvrb}
+\usepackage{color}
 \usepackage{lipsum}
 \usepackage{wrapfig}
 \usepackage[utf8]{inputenc}
@@ -28,7 +28,7 @@
 \renewcommand{\headrulewidth}{0pt}
 \fancyhead{}
 \usepackage{hyperref}
-
+\input{code/colorize}
 \begin{document}
 
 \bigskip
@@ -60,9 +60,9 @@ Lämna resten som default.\\
 Nu har du startat Eclipse samt skapat en enhet. 
 Nu är det dags för det roliga, koda!\\
 
-Välj “File -> New -> Android Application Project” 
-Application Name:  MyToDoList
-Minimum Required SDK:  API 11: Android 3.0 (Honeycomb)
+Välj “File -> New -> Android Application Project”\\ 
+Application Name:  MyToDoList\\
+Minimum Required SDK:  API 11: Android 3.0 (Honeycomb)\\
 Fortsätt genom att använda default inställningarna på resten av valen och avsluta med “Finish”. 
 Nu kan ditt fönster fortfarande ha en välkomstmeny till Android SDK. 
 Avsluta den med krysset som är uppe i vänstra hörnet i den inre ramen.
@@ -85,7 +85,7 @@ Vi kommer använda “TodoLog”.
 När logcat är öppnad behöver vi skapa ett filter, för Android kommer att spotta ut väldigt mycket meddelanden och vi är just nu enbart intresserade av “TodoLog”. 
 Tryck på det gröna plusset.
 Välj ett namn för ditt filter och välj “by Log Tag” där ni fyller i det namn på taggen ni vill filtrera efter.
-Testa att det fungerar genom att logga i funktionen onCreate.
+Testa att det fungerar genom att logga i funktionen onCreate.\\
 Log.d("TodoLog", "Programmet startat");
 
 \section{Visa en lista}
@@ -101,5 +101,7 @@ bla bla bla.. lista klicka debugprint bla bla
 \section{Byt ut debugprinten mot databas hantering}
 
 \section{Extra saker}
+
+\input{code/output}
 
 \end{document}
