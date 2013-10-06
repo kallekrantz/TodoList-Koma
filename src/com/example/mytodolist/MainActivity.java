@@ -14,18 +14,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends ListActivity {
-	private ArrayList<Integer> array;
-	private ArrayAdapter<Integer> adapter;
+	private ArrayList<Todo> array;
+	private ArrayAdapter<Todo> adapter;
+	private TodosDataSource datasource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        int size = 30;
-        array = new ArrayList<Integer>();
-        for(int i = 0; i < size; i++){
-        	array.add(i);
-        }
-        adapter = new ArrayAdapter<Integer>(this,
+        datasource = new TodosDataSource(this);
+        datasource.open();
+        array = datasource.getAllTodos();
+        
+        adapter = new ArrayAdapter<Todo>(this,
         		android.R.layout.simple_list_item_1 , array);
         setListAdapter(adapter);
         setContentView(R.layout.activity_main);
