@@ -9,14 +9,14 @@
 \headheight=0pt %1in margins at top and bottom (1 inch is added to this value by default)
 \headsep=0pt %Increase to increase white space in between headers and the top of the page
 \textheight=9.0in %How tall the text body is allowed to be on each page
-
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 
 %Font
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{tgpagella}
-
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
 
 \usepackage{lipsum}
 \usepackage{wrapfig}
@@ -27,26 +27,79 @@
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 \fancyhead{}
-
-
-\definecolor{lightgray}{gray}{0.8}
-\newcolumntype{L}{>{\raggedleft}p{0.14\textwidth}}
-\newcolumntype{R}{p{0.8\textwidth}}
-\newcommand\VRule{\color{lightgray}\vrule width 0.5pt}
-\newcommand{\CPP}
-{C\nolinebreak[4]\hspace{-.05em}\raisebox{.22ex}{\footnotesize\bf ++}}
+\usepackage{hyperref}
 
 \begin{document}
 
 \bigskip
 
-\centerline{{\LARGE \bf Android utveckling - ToDo app}}
-\noindent
-\color{lightgray}
-\line(1,0){470}
-\color{black}
+\centerline{{\LARGE \bf Kommunikation och Användargränssnitt - Android utveckling}}
+\section{Syfte}
+Denna laboration är en introduktion till Android programmering för att ni ska ha möjlighet att göra en mobilapp som projekt. 
+Ni kommer även att få en introduktion till hur man använder enklaste möjliga databas tillsammans med Android, det möjliggör applikationer med mer avancerade data.
+\section{Inledning}
+Uppgiften är att göra en “Att göra lista” med möjlighet att lägga till och ta bort uppgifter.
+\section{Installation}
+För att installera Android SDK gå in på http://developer.android.com/sdk/index.html och välj “Download the SDK, ADT Bundle for Windows”. Utvecklingsmiljön är en färdigkonfigurerat version av Eclipse och finns till Windows, Linux och Mac.\\
 
+Packa upp zip-filen till D: och öppna Eclipse från “adt-bundle-win-x86\_64-yyyymmdd/eclipse/eclipse.exe”. 
+Första gången du öppnar Eclipse kommer den fråga efter var du ska placera dess workspaces. 
+Vi föreslår att du väljer en mapp som finns på “private\_stuff”, vi kommer skapa en mapp och använda “H:/Workspace”.
 
+\section{Skapa en Android Emulator}
+För att kunna köra en Android applikation behövs en Android enhet. 
+Eftersom vi inte utgår från att alla har en Android telefon/platta föreslår vi att installera en Android emulator. 
+“Window -> Android Virtual Device Manager”, välj sedan “New...”.
 
+AVD Name: MyDevice\\
+Device:  Nexus 7\\
+Target:  Android 4.3 - API Level 18\\
+Emulating Options:  Use host GPU\\
+Lämna resten som default.\\
+\section{Skapa Projektet}
+Nu har du startat Eclipse samt skapat en enhet. 
+Nu är det dags för det roliga, koda!\\
+
+Välj “File -> New -> Android Application Project” 
+Application Name:  MyToDoList
+Minimum Required SDK:  API 11: Android 3.0 (Honeycomb)
+Fortsätt genom att använda default inställningarna på resten av valen och avsluta med “Finish”. 
+Nu kan ditt fönster fortfarande ha en välkomstmeny till Android SDK. 
+Avsluta den med krysset som är uppe i vänstra hörnet i den inre ramen.
+
+Kör din Androidapplikation genom att trycka på “Play” knappen i menyn eller Ctrl+F11. 
+Notera att Androidemulatorn tar några minuter att starta första gången. 
+Stäng inte av emulatorn med krysset mellan körningar för då tar det lika lång tid att starta varje gång.
+
+\section{Todo Applikation}
+Vi kommer inte att gå in på djupet i hur Android fungerar. 
+För er som arbetat med iOS tidigare kommer att märka att det skiljer sig en hel del och att hur vyer hanteras är annorlunda. 
+Fokus på labben kommer vara att arbeta i Java och nödvändiga Androidspecifika komponenter kommer att ges.
+\section{Debug prints}
+För den som är van att arbeta med textbaserade program är det vanligt att göra “debug prints” för att kontrollera att värden i variabler är korrekt samt se att funktioner blivit anropade etc.
+
+Öppna först Android logcat genom “Window -> Show View -> Other..”, Välj “Android -> LogCat”.
+Varje logmeddelande görs med att ge ett meddelande en tagg som identifierar vad den hör till. 
+Exempelvis “databas”, “info” eller debug”. 
+Vi kommer använda “TodoLog”. 
+När logcat är öppnad behöver vi skapa ett filter, för Android kommer att spotta ut väldigt mycket meddelanden och vi är just nu enbart intresserade av “TodoLog”. 
+Tryck på det gröna plusset.
+Välj ett namn för ditt filter och välj “by Log Tag” där ni fyller i det namn på taggen ni vill filtrera efter.
+Testa att det fungerar genom att logga i funktionen onCreate.
+Log.d("TodoLog", "Programmet startat");
+
+\section{Visa en lista}
+bla bla bla.. lista bla bla
+
+\section{Interagera (click event) med en lista}
+bla bla bla.. lista klicka debugprint bla bla
+
+\section{Visa en popup}
+
+\section{Databaskoppling}
+
+\section{Byt ut debugprinten mot databas hantering}
+
+\section{Extra saker}
 
 \end{document}
