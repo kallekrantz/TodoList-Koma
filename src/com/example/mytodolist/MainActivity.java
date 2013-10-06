@@ -54,12 +54,12 @@ public class MainActivity extends ListActivity {
         builder.setMessage("Confirm " + position + " " + array.get((int)id))
                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int innerId) {
-                       // FIRE ZE MISSILES!
                    }
                })
                .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int innerId) {
                        // User cancelled the dialog
+                	   datasource.deleteTodo(array.get((int)id));
                 	   adapter.remove(array.get((int)id));
                    }
                }).create().show();
