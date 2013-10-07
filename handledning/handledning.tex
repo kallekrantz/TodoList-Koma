@@ -141,6 +141,8 @@ Nu är det dags att få igång interaktionen med listan. Eftersom vår \textit{M
 
 För att skapa en event listener som lyssnar på interaktioner med listan ska vi överlagra metoden \textit{onListItemClick} från \textit{ListActivity}. Här kan vi använda Eclipse för att generera en metodsignatur. Ställ markören någonstans i klassen \textit{MainActivity} (men inte i någon metod), börja skriva \textit{“onListItemClick”} och tryck ctrl+space. Eclipse föreslår då att infoga en överlagrad variant av \textit{onListItemClick} från \textit{ListActivity} med alla funktionsparametrar som behövs.\\
 
+OBS! Notera att du behöver ändra så att de två sista argumenten är konstanta, dvs \textit{final int} respektive \textit{final long}. Detta behövs senare för att ha tillgång till dem i en lyssnare.\\
+
 Inne i metoden kan vi nu bestämma vad som ska hända när en användare klickar på en rad i listan. Enklast just nu är förstås att bara logga till LogCat.\\
 
 När du nu kör din app igen, så bör LogCat visa din text när man trycker på en post i listan.\\ \\
@@ -177,7 +179,8 @@ Här kan du antingen anropa en lyssnare som du skapat någon annanstans, eller h
 
 Inuti denna lyssnare så måste metoden \textit{onClick(DialogInterface, int)} finnas. Det är alltså här inne som funktionaliteten för att kunna ta bort en post ifrån listan skall implementeras.\\
 
-För att ta bort en post ifrån listan så behöver du anropa metoden \textit{remove} på medlemmen adapter. remove tar i det här fallet ett objekt av typen String som argument, då ArrayAdapter:n har blivit deklarerad för att hantera just String. Här vill du nu plocka bort den aktuella posten i listan genom att hitta den i testData.\\  
+För att ta bort en post ifrån listan så behöver du anropa metoden \textit{remove} på medlemmen adapter. remove tar i det här fallet ett objekt av typen String som argument, då ArrayAdapter:n har blivit deklarerad för att hantera just String. Här vill du nu plocka bort den aktuella posten i listan genom att hitta den i testData.
+I argumenten för \textit{onListItemClick} så finns den aktuella postens index i konstanten \textit{id}.\\  
 Om du gjort rätt så kommer posten tas bort från både testData och adapter, vilket kommer resultera i att listan i det grafiska gränssnittet uppdateras korrekt.\\
 
 Knappen för “Ok” behöver inte göra någonting, så hela onClick-metoden kan bara vara tom.\\ \\
@@ -187,6 +190,23 @@ Knappen för “Ok” behöver inte göra någonting, så hela onClick-metoden k
 	Uppgift: Skapa två knappar i dialogrutan, en som bara är “Ok” och inte gör något mer än att stänga rutan, och en “Delete” som tar bort den aktuella posten från listan.
 	}
 }
+
+\section{Knappar och textfält}
+Det hade naturligtvis varit trevligt med möjligheten att lägga till nya poster i listan. För att göra det behöver vi en knapp för att lägga till, och ett textfält för att skriva in namnet.\\
+
+Gå tillbaka till ditt grafiska gränssnitt (\textit{activity\_main.xml}). För att göra en smidig layout så behöver vi först ändra lite. I \textit{Outline}, högerklicka på \textit{RelativeLayout} och välj \textit{Change layout...}. Välj sedan \textit{LinearLayout(vertical)}. Inuti denna \textit{LinearLayout} så finns du din lista. Skapa ytterligare en \textit{LinearLayout}, men en som är horizontal. Lägg den inuti den första \textit{LinearLayout(vertical)}. Titta i \textit{Outline} så att din nya \textit{LinearLayout(horizontal)} ligger inuti den andra \textit{LinearLayout}, och ovanför listan.\\
+
+Lägg nu till en knapp(\textit{Form Widgets -> Button}) och ett textfält (\textfit{Text Fields -> Plain Text}) så de hamnar i din \textit{LinearLayout(horizontal)}. Ge dem ett lämpligt \textit{id} i \textit{Properties}, tex "add" för knappen och "name" för textfältet. Kom ihåg att det måste vara på formen \textit{@+id/ditt namn här}.\\
+
+TODO: bild på Outline här\\
+
+Om du testkör din app nu, så bör du se både knappen och textfältet som det ser ut när du designar ditt grafiska gränssnitt, men de gör inget än så låt oss fixa det. \\
+
+För att kunna interagera med knappen så behöver vi lägga till lyssnare. Detta gör vi i onCreate metoden.
+Skapa först knappen genom att skriva \input{code/button}
+
+
+
 \section{Databaskoppling}
 
 \section{Byt ut debugprinten mot databas hantering}
