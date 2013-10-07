@@ -1,5 +1,5 @@
 
-\documentclass[11 pt]{article} %Sets the default text size to 11pt and class to article.
+\documentclass[11 pt, titlepage]{article} %Sets the default text size to 11pt and class to article.
 %------------------------Dimensions--------------------------------------------
 \topmargin=0.0in %length of margin at the top of the page (1 inch added by default)
 \oddsidemargin=0.0in %length of margin on sides for odd pages
@@ -42,9 +42,11 @@
 
 \begin{document}
 
-\bigskip
 
-\centerline{{\LARGE \bf Kommunikation och Användargränssnitt - Android utveckling}}
+\title{Kommunikation och Användargränssnitt - Android utveckling}
+\author{Andreas Valter \and Fredrik Lindner \and  \and Karl-Johan Krantz \and Jonas Strandstedt \and Jonas Zeitler }
+\maketitle
+
 \section{Syfte}
 Denna laboration är en introduktion till Android programmering för att ni ska ha möjlighet att göra en mobilapp som projekt. 
 Ni kommer även att få en introduktion till hur man använder enklaste möjliga databas tillsammans med Android, det möjliggör applikationer med mer avancerade data.
@@ -57,7 +59,7 @@ Packa upp zip-filen till D: och öppna Eclipse från “adt-bundle-win-x86\_64-y
 Första gången du öppnar Eclipse kommer den fråga efter var du ska placera dess workspaces. 
 Vi föreslår att du väljer en mapp som finns på “private\_stuff”, vi kommer skapa en mapp och använda “H:/Workspace”.
 
-\section{Skapa en Android Emulator}
+\subsection{Skapa en Android Emulator}
 För att kunna köra en Android applikation behövs en Android enhet. 
 Eftersom vi inte utgår från att alla har en Android telefon/platta föreslår vi att installera en Android emulator. 
 “Window -> Android Virtual Device Manager”, välj sedan “New...”.
@@ -67,7 +69,8 @@ Device:  Nexus 7\\
 Target:  Android 4.3 - API Level 18\\
 Emulating Options:  Use host GPU\\
 Lämna resten som default.\\
-\section{Skapa Projektet}
+
+\subsection{Skapa Projektet}
 Nu har du startat Eclipse samt skapat en enhet. 
 Nu är det dags för det roliga, koda!\\
 
@@ -80,13 +83,13 @@ Avsluta den med krysset som är uppe i vänstra hörnet i den inre ramen.
 
 Kör din Androidapplikation genom att trycka på “Play” knappen i menyn eller Ctrl+F11. 
 Notera att Androidemulatorn tar några minuter att starta första gången. 
-Stäng inte av emulatorn med krysset mellan körningar för då tar det lika lång tid att starta varje gång.
+Stäng inte av emulatorn med krysset mellan körningar för då tar det lång tid att starta varje gång.
 
 \section{Todo Applikation}
 Vi kommer inte att gå in på djupet i hur Android fungerar. 
 För er som arbetat med iOS tidigare kommer att märka att det skiljer sig en hel del och att hur vyer hanteras är annorlunda. 
 Fokus på labben kommer vara att arbeta i Java och nödvändiga Androidspecifika komponenter kommer att ges.
-\section{Debug prints}
+\subsection{Debug prints}
 För den som är van att arbeta med textbaserade program är det vanligt att göra “debug prints” för att kontrollera att värden i variabler är korrekt samt se att funktioner blivit anropade etc.
 
 Öppna först Android logcat genom “\textit{Window -> Show View -> Other..}”, Välj “\textit{Android -> LogCat}”.\\
@@ -94,12 +97,13 @@ Varje logmeddelande görs med att ge ett meddelande en tagg som identifierar vad
 Exempelvis “databas”, “info” eller debug”. 
 Vi kommer använda “TodoLog”. 
 När logcat är öppnad behöver vi skapa ett filter, för Android kommer att spotta ut väldigt mycket meddelanden och vi är just nu enbart intresserade av “TodoLog”.\\ 
-Tryck på det gröna plusset.\\ \\
+Tryck på det gröna plusset.\\
+
 Välj ett namn för ditt filter och välj “by Log Tag” där ni fyller i det namn på taggen ni vill filtrera efter.\\ \\
 Testa att det fungerar genom att logga i funktionen onCreate.
 \input{code/log}
 
-\section{Visa en lista}
+\subsection{Visa en lista}
 För att kunna skapa en lista med saker att göra är det lämpligt att först skapa den grafiska layouten för listan. Det grafiska gränssnittet ligger i filen “\textit{res -> layout -> activity\_main.xml}”.\\
 I Eclipse så kan du enkelt navigera till filen i “Package Explorer”. Dubbelklicka för att öppna den.\\
 
@@ -131,12 +135,12 @@ Om allt har gått rätt till så bör nu appen kunna startas genom att trycka p�
 
 \fbox{
   \parbox{\textwidth}{
-	Uppgift: Gör en lista i det grafiska gränssnittet.
+	\textbf{Uppgift:} Gör en lista i det grafiska gränssnittet.
 	Skapa en ArrayList av typen String, initialisera den med lite data
 	och koppla ihop det med en ArrayAdapter, också av typen String.
 	}
 }
-\section{Interagera (click event) med en lista}
+\subsection{Interagera (click event) med en lista}
 Nu är det dags att få igång interaktionen med listan. Eftersom vår \textit{MainActivity} ärver av \textit{ListActivity}, så är det ganska enkelt att komma igång med.\\
 
 För att skapa en event listener som lyssnar på interaktioner med listan ska vi överlagra metoden \textit{onListItemClick} från \textit{ListActivity}. Här kan vi använda Eclipse för att generera en metodsignatur. Ställ markören någonstans i klassen \textit{MainActivity} (men inte i någon metod), börja skriva \textit{“onListItemClick”} och tryck ctrl+space. Eclipse föreslår då att infoga en överlagrad variant av \textit{onListItemClick} från \textit{ListActivity} med alla funktionsparametrar som behövs.\\
@@ -148,10 +152,10 @@ Inne i metoden kan vi nu bestämma vad som ska hända när en användare klickar
 När du nu kör din app igen, så bör LogCat visa din text när man trycker på en post i listan.\\ \\
 \fbox{
   \parbox{\textwidth}{
-	Uppgift: Implentera onListItemClick och skriv ut någon text genom LogCat för att se att interaktionen med listan funkar korrekt. 
+	\textbf{Uppgift:} Implentera onListItemClick och skriv ut någon text genom LogCat för att se att interaktionen med listan funkar korrekt. 
 	}
 }
-\section{Visa en popup}
+\subsection{Visa en popup}
 Nu när vi vet att det funkar att klicka på en post i listan, så kanske det kan vara roligare att få upp ett meddelande i appen istället för LogCat.
 
 Tidigare så såg vi att man enkelt kunde utforma sitt grafiska gränssnitt med den grafiska editorn. Det kan man använda för mer eller mindre allt grafiskt arbete, men när det kommer till enklare saker som tex dialogrutor kan det vara lämpligt att skriva de direkt i koden.
@@ -167,7 +171,7 @@ Sedan kan vi visa dialog genom dialog.show();
 Kör appen och se hur du nu får en popup ruta med texten när du klickar på en post!\\ \\
 \fbox{
   \parbox{\textwidth}{
-	Uppgift: Använd dig av \textit{AlertDialog} och dess tillhörande \textit{Builder} för att skapa en dialogruta som visas när man trycker på en post i listan.
+	\textbf{Uppgift:} Använd dig av \textit{AlertDialog} och dess tillhörande \textit{Builder} för att skapa en dialogruta som visas när man trycker på en post i listan.
 	}
 }
 
@@ -187,11 +191,11 @@ Knappen för “Ok” behöver inte göra någonting, så hela onClick-metoden k
 
 \fbox{
   \parbox{\textwidth}{
-	Uppgift: Skapa två knappar i dialogrutan, en som bara är “Ok” och inte gör något mer än att stänga rutan, och en “Delete” som tar bort den aktuella posten från listan.
+	\textbf{Uppgift:} Skapa två knappar i dialogrutan, en som bara är “Ok” och inte gör något mer än att stänga rutan, och en “Delete” som tar bort den aktuella posten från listan.
 	}
 }
 
-\section{Knappar och textfält}
+\subsection{Knappar och textfält}
 Det hade naturligtvis varit trevligt med möjligheten att lägga till nya poster i listan. För att göra det behöver vi en knapp för att lägga till, och ett textfält för att skriva in namnet.\\
 
 Gå tillbaka till ditt grafiska gränssnitt (\textit{activity\_main.xml}). För att göra en smidig layout så behöver vi först ändra lite. I \textit{Outline}, högerklicka på \textit{RelativeLayout} och välj \textit{Change layout...}. Välj sedan \textit{LinearLayout(vertical)}. Inuti denna \textit{LinearLayout} så finns du din lista. Skapa ytterligare en \textit{LinearLayout}, men en som är horizontal. Lägg den inuti den första \textit{LinearLayout(vertical)}. Titta i \textit{Outline} så att din nya \textit{LinearLayout(horizontal)} ligger inuti den andra \textit{LinearLayout}, och ovanför listan.\\
@@ -217,7 +221,7 @@ Metoden \textit{getText()} hämtar ut text från ett textfält, dock är det int
 Sen är det bara att lägga in texten i form av en String i \textit{adapter}. Det är väldigt likt det vi gjorde tidigare när vi tog bort elementet ur \textit{adapter}...\\ \\
 \fbox{
   \parbox{\textwidth}{
-	Uppgift: Skapa en knapp och ett textfält. När man trycker på knappen skall texten som är i textfältet läggas till i listan.
+	\textbf{Uppgift:} Skapa en knapp och ett textfält. När man trycker på knappen skall texten som är i textfältet läggas till i listan.
 	}
 }
 \section{Databaskoppling}
@@ -230,7 +234,7 @@ TodosDataSource metoder: open(), getAllTodos(), createTodo(), deleteTodo() \\
 
 \fbox{
   \parbox{\textwidth}{
-  	Uppgift: Skapa en ToDo-list app med koppling till en databas.
+  	\textbf{Uppgift:} Skapa en ToDo-list app med koppling till en databas.
   }
 }
 \\ \\
