@@ -89,6 +89,12 @@ Stäng inte av emulatorn med krysset mellan körningar för då tar det lång ti
 Vi kommer inte att gå in på djupet i hur Android fungerar. 
 För er som arbetat med iOS tidigare kommer att märka att det skiljer sig en hel del och att hur vyer hanteras är annorlunda. 
 Fokus på labben kommer vara att arbeta i Java och nödvändiga Androidspecifika komponenter kommer att ges.
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=90mm]{images/app.png}
+\caption{Exempel på hur en färdig ToDo-app kan se ut.}
+\label{overflow}
+\end{figure}
 \subsection{Debug prints}
 För den som är van att arbeta med textbaserade program är det vanligt att göra “debug prints” för att kontrollera att värden i variabler är korrekt samt se att funktioner blivit anropade etc.
 
@@ -187,7 +193,14 @@ För att ta bort en post ifrån listan så behöver du anropa metoden \textit{re
 I argumenten för \textit{onListItemClick} så finns den aktuella postens index i konstanten \textit{id}.\\  
 Om du gjort rätt så kommer posten tas bort från både testData och adapter, vilket kommer resultera i att listan i det grafiska gränssnittet uppdateras korrekt.\\
 
-Knappen för “Ok” behöver inte göra någonting, så hela onClick-metoden kan bara vara tom.\\ \\
+Knappen för “Ok” behöver inte göra någonting, så hela onClick-metoden kan bara vara tom.\\
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=90mm]{images/popup.png}
+\caption{AlertDialog med möjlighet att ta bort den aktuella posten i listan.}
+\label{overflow}
+\end{figure} \\
 
 \fbox{
   \parbox{\textwidth}{
@@ -202,7 +215,12 @@ Gå tillbaka till ditt grafiska gränssnitt (\textit{activity\_main.xml}). För 
 
 Lägg nu till en knapp(\textit{Form Widgets -> Button}) och ett textfält (\textit{Text Fields -> Plain Text}) så de hamnar i din \textit{LinearLayout(horizontal)}. Ge dem ett lämpligt \textit{id} i \textit{Properties}, tex "add" för knappen och "name" för textfältet. Kom ihåg att det måste vara på formen \textit{@+id/ditt-namn-här}.\\
 
-TODO: bild på Outline här\\
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=90mm]{images/outline.png}
+\caption{Outline med alla elementen inlagda.}
+\label{overflow}
+\end{figure} \\
 
 Om du testkör din app nu, så bör du se både knappen och textfältet som det ser ut när du designar ditt grafiska gränssnitt, men de gör inget än så låt oss fixa det. \\
 
